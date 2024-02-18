@@ -18,12 +18,14 @@ class Error(Schema):
     message: str
 
 
-@api.post("/hello", response={200: UserSchema, 403: Error}, openapi_extra = {
-        "responses": {
-            200: {"description": "You will receive this response if everything is ok"},
-            403: {"description": "You don't have what it takes for this API"}
-        }
-    })
+@api.post("/hello", response={200: UserSchema, 403: Error}, 
+    #       openapi_extra = {
+    #     "responses": {
+    #         200: {"description": "You will receive this response if everything is ok"},
+    #         403: {"description": "You don't have what it takes for this API"}
+    #     }
+    # }
+          )
 def hello(request, body: UserSchema):
     if body.username == 'error':
         return 403, Error(message='error')
